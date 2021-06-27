@@ -44,13 +44,11 @@ document.querySelector(".back-but").addEventListener("click", () => {
 function thisBook(page) {
   let value = document.querySelector(".book-name").value;
   value = value.split(" ").join("+");
-  console.log(value);
   fetch(`http://openlibrary.org/search.json?q=${value}&page=${page}`)
     .then(function (books) {
       return books.json();
     })
     .then(function (books) {
-      console.log(books);
       var pageCount = Math.ceil(books.numFound / 100);
       let numFound = document.querySelector(".num-found");
       numFound.textContent = "Page: " + page;
