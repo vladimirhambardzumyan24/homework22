@@ -31,15 +31,19 @@ function thisBook() {
         ul.appendChild(li);
         li.textContent = el.title;
       });
+
       let authorName = document.querySelector(".author-name");
       authorName.textContent = "Author Name";
       books.docs.forEach((el) => {
-        el.author_name.forEach((element) => {
-          let li = document.createElement("li");
-          authorName.appendChild(li);
-          li.textContent = element;
-        });
+        if (el.author_name !== undefined) {
+          el.author_name.forEach((element) => {
+            let li = document.createElement("li");
+            authorName.appendChild(li);
+            li.textContent = element;
+          });
+        }
       });
+
       let firstYear = document.querySelector(".first-year");
       firstYear.textContent = "First publish year";
       books.docs.forEach((el) => {
@@ -47,6 +51,7 @@ function thisBook() {
         firstYear.appendChild(li);
         li.textContent = el.first_publish_year;
       });
+
       let subjectt = document.querySelector(".subject");
       subjectt.textContent = "Subject (only first 5 items)";
       books.docs.forEach((el) => {
