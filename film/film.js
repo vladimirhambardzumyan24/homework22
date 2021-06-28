@@ -1,19 +1,35 @@
-fetch(
-  "https://ghibliapi.herokuapp.com/films/58611129-2dbc-4a81-a72f-77ddfc1b1b49"
-)
-  .then(function (film) {
-    return film.json();
+fetch("https://ghibliapi.herokuapp.com/films")
+  .then(function (films) {
+    return films.json();
   })
-  .then(function (film) {
-    console.log(film);
-    let title = document.querySelector(".title");
-    title.textContent = film.title;
-    let description = document.querySelector(".description");
-    description.textContent = film.description;
-    let director = document.querySelector(".director");
-    director.textContent = film.director;
-    let producer = document.querySelector(".producer");
-    producer.textContent = film.producer;
-    let dateRelease = document.querySelector(".date-release");
-    dateRelease.textContent = film.release_date;
+  .then(function (films) {
+    console.log(films);
+    const wrapper = document.querySelector(".wrapper");
+    films.forEach((film) => {
+      const item = `
+        <div class="container">
+          <div class="all">
+            <label for="title">Title :</label>
+            <span name="title" class="title all-span">${film.title}</span>
+          </div>
+          <div class="all">
+            <label for="description">Description :</label>
+            <div name="description" class="description all-span">${film.description}</div>
+          </div>
+          <div class="all">
+            <label for="director">Director :</label>
+            <span name="director" class="director all-span">${film.director}</span>
+          </div>
+          <div class="all">
+            <span name="producer">Producer :</span>
+            <label for="producer" class="producer all-span">${film.producer}</label>
+          </div>
+          <div class="all">
+            <label for="date-release">Release Date :</label>
+            <span name="date-release" class="date-release all-span">${film.release_date}</span>
+          </div>
+        </div>
+      `;
+      wrapper.insertAdjacentHTML("beforeend", item);
+    });
   });
